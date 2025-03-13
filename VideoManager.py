@@ -88,6 +88,9 @@ class VideoManager:
         for i, video in enumerate(self.videos):
             print(f"Video {i}:", json.dumps(video, indent=3))
 
+    def get_video_info(self, idx):
+        return self.videos[idx]
+
 
 def get_video_stats(filename):
     clip = VideoFileClip(filename)
