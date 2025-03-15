@@ -1,15 +1,18 @@
-from google import genai
+import google.generativeai as genai
+
 import os
 import time
 from IPython.display import Markdown
 import subprocess
 import sys
-from google import genai
+
 from conf import GEMINI_API_KEY
-from google.genai.files import Files
+# from google.generativeai.files import Files
+
 
 def get_client():
-    return genai.Client(api_key=GEMINI_API_KEY)
+    genai.configure(api_key=GEMINI_API_KEY)
+    return genai
 
 
 def generate_content(video_file_name, task, custom_prompt=''):

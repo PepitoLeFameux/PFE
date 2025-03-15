@@ -1,3 +1,5 @@
+import sys
+
 from moviepy import *  # import everythings (variables, classes, methods...) inside moviepy.editor
 from PIL import Image
 from conf import THUMBNAIL_FOLDER, RESIZED_FOLDER, JSON_LOCATION
@@ -9,6 +11,10 @@ import cv2
 import os
 from conf import RESIZED_FOLDER
 
+# ROOT_DIR correspond au dossier racine du projet (contenant les fichiers backend)
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
 
 class VideoManager:
     def __init__(self):
