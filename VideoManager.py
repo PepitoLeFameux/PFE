@@ -8,6 +8,7 @@ import google.generativeai as genai
 import cv2
 import os
 from conf import RESIZED_FOLDER
+from api import generate_content
 
 
 class VideoManager:
@@ -90,6 +91,10 @@ class VideoManager:
 
     def get_video_info(self, idx):
         return self.videos[idx]
+
+    def generate_content_nth_video(self, n, task, custom_prompt=''):
+        video_file_name = self.get_nth_video_upload_name(n)
+        return generate_content(self.client, video_file_name, task, custom_prompt='')
 
 
 def get_video_stats(filename):
@@ -194,6 +199,7 @@ def resize_video(input_path, output_path, width=None, height=480):
     else:
         print(f"Error: Failed to create valid output video at '{output_path}'.")
         return None
+
 
 
 def remove_resized_video(video_path):
