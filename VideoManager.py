@@ -35,6 +35,7 @@ class VideoManager:
 
     def read_json(self):
         if not os.path.exists(JSON_LOCATION):
+            os.makedirs(os.path.split(JSON_LOCATION)[0])
             with open(JSON_LOCATION, mode='w') as json_file:
                 json.dump([], json_file)
 
@@ -200,12 +201,10 @@ def resize_video(input_path, output_path, width=None, height=480):
         print(f"Error: Failed to create valid output video at '{output_path}'.")
         return None
 
-
-
 def remove_resized_video(video_path):
     os.remove(video_path)
 
-# manager = VideoManager()
+manager = VideoManager()
 # manager.remove_all_videos()
 # manager.upload_video("videos/PostsOfCats-1888852858608521343-01.mp4")
 # name = manager.get_nth_video_upload_name(0)
