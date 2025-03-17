@@ -150,13 +150,13 @@ with st.sidebar.form("my-form", clear_on_submit=True):
         "Charger une vidéo",
         type=["mp4"]
     )
-    submitted = st.form_submit_button("Add video")
+    submitted = st.form_submit_button("Ajouter vidéo")
 
     if submitted and uploaded_file is not None:
         save_path = 'videos/' + uploaded_file.name
         with open(save_path, 'wb') as f:
             f.write(uploaded_file.getbuffer())
-        st.success("Video added successfully. Check the list below.")
+        st.success("Vidéo ajoutée avec succès. Choisissez-la dans la liste ci-dessous")
 
 # Bouton pour lancer le traitement
 if st.sidebar.button("Analyser la vidéo"):
