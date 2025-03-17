@@ -29,12 +29,12 @@ class VideoManager:
     def remove_resized_video(self, resized_filename):
         remove_resized_video(resized_filename)
 
-    def generate_content(self, upload_name, task, custom_prompt=''):
-        return generate_content(self.client, upload_name, task, custom_prompt)
+    def generate_content(self, upload_name, lang, task, custom_prompt=''):
+        return generate_content(self.client, upload_name, lang, task, custom_prompt)
 
-    def generate_content_from_uri(self, video_uri, task, custom_prompt=''):
+    def generate_content_from_uri(self, video_uri, lang, task, custom_prompt=''):
         upload_name = self.upload_video(video_uri)
-        content = generate_content(self.client, upload_name, task, custom_prompt)
+        content = generate_content(self.client, upload_name, lang, task, custom_prompt)
         self.remove_video(upload_name)
         return content
 

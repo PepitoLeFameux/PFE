@@ -11,7 +11,7 @@ def get_client():
     return genai.Client(api_key=GEMINI_API_KEY)
 
 
-def generate_content(client, video_file_name, task, custom_prompt=''):
+def generate_content(client, video_file_name, lang, task, custom_prompt=''):
     video_file = client.files.get(name=video_file_name)
 
     prompt = None
@@ -33,6 +33,13 @@ def generate_content(client, video_file_name, task, custom_prompt=''):
     if prompt is None:
         return ("Please provide a valid task. Valid tasks are SUMMARIZE, TIMESTAMPS, AUDIO_SUMMARY, and"
                 "AUDIO_TRANSCRIPTION.")
+
+    if lang == 'FR':
+        prompt = prompt + "\nWrite your answer in French please."
+    elif lang == 'EN':
+        prompt = prompt + "\nWrite your answer in English please."
+
+    prompt += "\nYour answer i sfor display only so don't ask me my opinion about your answer please."
 
 
     # Pass the video file reference like any other media part.

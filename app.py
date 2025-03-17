@@ -21,6 +21,14 @@ mode_to_task = {SUMMARIZE: 'SUMMARIZE',
                 AUDIO_TRANSCRIPTION: 'AUDIO_TRANSCRIPTION',
                 CUSTOM_PROMPT: 'CUSTOM_PROMPT'}
 
+LANG_FR = "Français"
+LANG_EN = "Anglais"
+
+lang_conversion = {
+    LANG_FR: 'FR',
+    LANG_EN: 'EN'
+}
+
 # Configuration de la page
 st.set_page_config(
     page_title="Analyse de Vidéo (Simulation)",
@@ -64,6 +72,7 @@ def analyze_video():
 
         filename = 'videos/' + st.session_state["video_filename"]
         task = mode_to_task[mode]
+        prompt_lang = lang_conversion[lang]
 
         # Step 1
         st.write(steps[0])
@@ -77,7 +86,7 @@ def analyze_video():
 
         # Step 3
         st.write(steps[2])
-        content = manager.generate_content(upload_name, task, st.session_state["custom_prompt"])
+        content = manager.generate_content(upload_name, prompt_lang, task, st.session_state["custom_prompt"])
         progress_bar.progress(int(3 / len(steps) * 100))
 
         # Step 4
@@ -144,7 +153,16 @@ mode = st.sidebar.selectbox(
     ]
 )
 
-# 3. Chargement de la vidéo via file_uploader
+# 3. Choix de la langue de la réponse
+lang = st.sidebar.selectbox(
+    "Langue de la génération :",
+    [
+        LANG_FR,
+        LANG_EN
+    ]
+)
+
+# 4. Chargement de la vidéo via file_uploader
 with st.sidebar.form("my-form", clear_on_submit=True):
     uploaded_file = st.file_uploader(
         "Charger une vidéo",
