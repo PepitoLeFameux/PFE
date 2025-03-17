@@ -200,10 +200,10 @@ for video_name in local_videos:
         clip.close()
         c1, c2 = st.sidebar.columns([2, 3])
         with c1:
-            st.image(frame, width=80)
+            st.image(frame, width=200)
         with c2:
             st.write(f"**{video_name}**\nDurée: {duration:.2f} sec")
-            if st.button(f"Charger_{video_name}"):
+            if st.button(f"Charger la vidéo", key=video_name):
                 with open(path, "rb") as f:
                     st.session_state["video_file"] = f.read()
                 st.session_state["video_filename"] = video_name
