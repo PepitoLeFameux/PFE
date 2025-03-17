@@ -21,7 +21,7 @@ def generate_content(client, video_file_name, task, custom_prompt=''):
     elif task == 'TIMESTAMPS':
         prompt = "Give me a exhaustive list of notable events in the video and their corresponding timestamps."
     elif task == 'AUDIO_SUMMARY':
-        prompt = ("Transcribe me in the text form the literal dialogue that is audible in the video. You can use "
+        prompt = ("Summarize me the dialogue that is audible in the video. You can use "
                   "visual interpretation to understand it more accurately.")
     elif task == 'AUDIO_TRANSCRIPTION':
         prompt = ("Transcribe me in the text form the literal dialogue that is audible in the video, adding to each"
