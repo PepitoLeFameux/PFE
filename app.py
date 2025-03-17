@@ -46,6 +46,8 @@ if "custom_prompt_confirmed" not in st.session_state:
     st.session_state["custom_prompt_confirmed"] = False
 if "analyze_requested" not in st.session_state:
     st.session_state["analyze_requested"] = False
+if "add_video_to_folder" not in st.session_state:
+    st.session_state["add_video_to_folder"] = False
 
 
 # --- Fonction d'analyse de la vidéo ---
@@ -143,10 +145,18 @@ mode = st.sidebar.selectbox(
 )
 
 # 3. Chargement de la vidéo via file_uploader
-uploaded_file = st.sidebar.file_uploader(
-    "Charger une vidéo",
-    type=["mp4"]
-)
+with st.sidebar.form("my-form", clear_on_submit=True):
+    uploaded_file = st.file_uploader(
+        "Charger une vidéo",
+        type=["mp4"]
+    )
+    submitted = st.form_submit_button("Add video")
+
+    if submitted and uploaded_file is not None:
+        save_path = 'videos/' + uploaded_file.name
+        with open(save_path, 'wb') as f:
+            f.write(uploaded_file.getbuffer())
+        st.success("Video added successfully. Check the list below.")
 
 # Bouton pour lancer le traitement
 if st.sidebar.button("Analyser la vidéo"):
@@ -159,12 +169,10 @@ if st.session_state["analyze_requested"]:
         custom_prompt_dialog()
         st.stop()  # Attendre la confirmation du prompt
     # Détermine la vidéo à analyser (priorité au file uploader)
-    if uploaded_file is not None:
-        st.session_state["video_file"] = uploaded_file
-        st.session_state["video_filename"] = uploaded_file.name
-    elif st.session_state["video_file"] is None:
+
+    if st.session_state["video_file"] is None:
         st.warning("Veuillez d'abord sélectionner une vidéo ou en choisir une ci-dessous.")
-    if st.session_state["video_file"] is not None:
+    else:
         analyze_video()
         st.session_state["analyze_requested"] = False
 
