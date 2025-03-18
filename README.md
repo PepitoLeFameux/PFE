@@ -66,30 +66,30 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-You need to install a few Python librairies in your environment.
+* You need to install a few Python librairies in your environment.
   ```sh
   pip install -r /path/to/requirements.txt
   ```
 
-The second step is the installation of [FFmpeg](https://ffmpeg.org/) on your system.
+* The second step is the installation of [FFmpeg](https://ffmpeg.org/) on your system.
 
-For Linux:
-  ```sh
-  sudo apt update sudo apt install ffmpeg
-  ```
-
-For macOS (via Homebrew):
-  ```sh
-  brew install ffmpeg
-  ```
-
-For Windows:
-Download the FFmpeg executable from the [FFmpeg website](https://ffmpeg.org/download.html) and add it to your system’s PATH.
-
-Here is a more detailled guide:
-1. Get the latest build of FFmpeg for Windows on [BtbN's repository](https://github.com/BtbN/FFmpeg-Builds/releases). It should be named "ffmpeg-master-latest-win64-gpl-shared.zip"
-2. Extract the archive file and locate the /bin folder. Select all the executable files and copy them in the folder of your choice.
-3. Add this folder to your system's PATH.
+  For Linux:
+    ```sh
+    sudo apt update sudo apt install ffmpeg
+    ```
+  
+  For macOS (via Homebrew):
+    ```sh
+    brew install ffmpeg
+    ```
+  
+  For Windows:
+  Download the FFmpeg executable from the [FFmpeg website](https://ffmpeg.org/download.html) and add it to your system’s PATH.
+  
+  Here is a more detailled guide:
+  1. Get the latest build of FFmpeg for Windows on [BtbN's repository](https://github.com/BtbN/FFmpeg-Builds/releases). It should be named "ffmpeg-master-latest-win64-gpl-shared.zip"
+  2. Extract the archive file and locate the /bin folder. Select all the executable files (.exe) and copy them in the folder of your choice.
+  3. Add this folder to your system's PATH.
 
 ### Installation
 
@@ -115,9 +115,12 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Simply start the app
+   ```sh
+   streamlit run app.py
+   ```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+You're all set!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
