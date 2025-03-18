@@ -39,7 +39,7 @@ def generate_content(client, video_file_name, lang, task, custom_prompt=''):
     elif lang == 'EN':
         prompt = prompt + "\nWrite your answer in English please."
 
-    prompt += "\nYour answer i sfor display only so don't ask me my opinion about your answer please."
+    prompt += "\nYour answer is for display only so don't ask me my opinion about your answer please."
 
 
     # Pass the video file reference like any other media part.
