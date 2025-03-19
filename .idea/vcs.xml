@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vid2seq/scenic" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vid2seq/scenic/scenic/projects/vid2seq/grain" vcs="Git" />
   </component>
 </project>
