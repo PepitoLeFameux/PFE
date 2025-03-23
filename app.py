@@ -14,12 +14,14 @@ TIMESTAMPS = "Liste des évènements avec timestamps"
 AUDIO_SUMMARY = "Résumé audio"
 AUDIO_TRANSCRIPTION = "Transcription audio"
 CUSTOM_PROMPT = "Prompt customisé"
+QUESTIONS_ANSWERS = 'Création de questions-réponses'
 
 mode_to_task = {SUMMARIZE: 'SUMMARIZE',
                 TIMESTAMPS: 'TIMESTAMPS',
                 AUDIO_SUMMARY: 'AUDIO_SUMMARY',
                 AUDIO_TRANSCRIPTION: 'AUDIO_TRANSCRIPTION',
-                CUSTOM_PROMPT: 'CUSTOM_PROMPT'}
+                CUSTOM_PROMPT: 'CUSTOM_PROMPT',
+                QUESTIONS_ANSWERS: 'QUESTIONS_ANSWERS'}
 
 LANG_FR = "Français"
 LANG_EN = "Anglais"
@@ -149,6 +151,7 @@ mode = st.sidebar.selectbox(
         TIMESTAMPS,
         AUDIO_SUMMARY,
         AUDIO_TRANSCRIPTION,
+        QUESTIONS_ANSWERS,
         CUSTOM_PROMPT
     ]
 )
@@ -161,6 +164,10 @@ lang = st.sidebar.selectbox(
         LANG_EN
     ]
 )
+
+# Bouton pour lancer le traitement
+if st.sidebar.button("Analyser la vidéo"):
+    st.session_state["analyze_requested"] = True
 
 # 4. Chargement de la vidéo via file_uploader
 with st.sidebar.form("my-form", clear_on_submit=True):
@@ -175,10 +182,6 @@ with st.sidebar.form("my-form", clear_on_submit=True):
         with open(save_path, 'wb') as f:
             f.write(uploaded_file.getbuffer())
         st.success("Vidéo ajoutée avec succès. Choisissez-la dans la liste ci-dessous")
-
-# Bouton pour lancer le traitement
-if st.sidebar.button("Analyser la vidéo"):
-    st.session_state["analyze_requested"] = True
 
 # Si l'analyse est demandée, on lance le traitement
 if st.session_state["analyze_requested"]:
@@ -221,12 +224,15 @@ for video_name in local_videos:
             st.image(frame, width=200)
         with c2:
             st.write(f"**{video_name}**\nDurée: {duration:.2f} sec")
-            if st.button(f"Charger la vidéo", key=video_name):
+            if st.button(f"Charger la vidéo", key=video_name+'_add'):
                 with open(path, "rb") as f:
                     st.session_state["video_file"] = f.read()
                 st.session_state["video_filename"] = video_name
                 # Réinitialiser la confirmation du prompt lors du changement de vidéo
                 st.session_state["custom_prompt_confirmed"] = False
+                st.rerun()
+            if st.button(f"Supprimer la vidéo", key=video_name+'_del'):
+                os.remove(path)
                 st.rerun()
     except Exception as e:
         st.sidebar.write(f"Impossible de lire la vidéo {video_name}: {e}")
